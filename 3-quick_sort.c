@@ -30,14 +30,13 @@ int partition(int *arr, int start, int end, size_t size)
 	int j;
 
 	pivot = arr[end];
-	i = (start - 1);
-	for (j = start; j <= end - 1; j++)
+	i = start - 1;
+	for (j = start; j < end; j++)
 	{
 		if (arr[j] < pivot)
 		{
 			i++;
 			_swap(&arr[i], &arr[j]);
-			print_array(arr, size);
 		}
 	}
 	_swap(&arr[i + 1], &arr[end]);
@@ -56,12 +55,11 @@ void quick_sort_recursive(int *array, size_t size, int start, int end)
 {
 	int pi;
 
-	if (start < end)
-	{
-		pi = partition(array, start, end, size);
-		quick_sort_recursive(array, size, start, pi - 1);
-		quick_sort_recursive(array, size, pi + 1, end);
-	}
+	if (start >= end || start < 0)
+		return;
+	pi = partition(array, start, end, size);
+	quick_sort_recursive(array, size, start, pi - 1);
+	quick_sort_recursive(array, size, pi + 1, end);
 }
 
 /**
